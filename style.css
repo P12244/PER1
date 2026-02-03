@@ -1,0 +1,55 @@
+:root{
+  --bg: #faf8f3;
+  --card: #ffffff;
+  --accent: #2b8a3e;
+  --muted: #7a7a7a;
+}
+
+*{box-sizing:border-box}
+html,body,#app{height:100%;margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+#app{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:12px;gap:10px;min-height:100vh}
+#hud{width:100%;max-width:520px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+#hud>div{background:var(--card);padding:8px 12px;border-radius:10px;box-shadow:0 2px 4px rgba(0,0,0,0.06);font-weight:600}
+#restart{background:var(--accent);color:white;border:0;padding:8px 12px;border-radius:10px;font-size:18px;min-width:44px;height:44px;display:flex;align-items:center;justify-content:center}
+#board{width:100%;max-width:520px;aspect-ratio:3/4;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:10px;padding:6px}
+.card{
+  position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fff,#f7f7f7);display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;
+  cursor:pointer;touch-action:manipulation;
+  box-shadow:0 4px 8px rgba(0,0,0,0.06);
+  /* children will handle the flip so the card itself doesn't rotate */
+}
+.card.locked{cursor:default;box-shadow:0 6px 12px rgba(0,0,0,0.08)}
+.cardInner{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  backface-visibility:hidden;pointer-events:none;
+  transition:transform .38s ease;
+  transform-style:preserve-3d;
+}
+/* front is the visible cover (question) when NOT flipped */
+.face.front{transform:rotateY(0deg)}
+/* back holds the image and stays hidden until flipped */
+.face.back{transform:rotateY(-180deg);background:linear-gradient(180deg,#dfe8ff,#c6ddff);font-size:28px;color:#fff}
+/* when card has flipped class, swap the faces */
+.card.flipped .face.front{transform:rotateY(180deg)}
+.card.flipped .face.back{transform:rotateY(0deg)}
+.faceContent{font-size:42px}
+.small{font-size:14px;color:var(--muted);font-weight:600}
+
+#overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35)}
+#overlay.hidden{display:none}
+#resultCard{background:var(--card);padding:16px;border-radius:16px;display:flex;flex-direction:column;align-items:center;gap:12px;min-width:220px;box-shadow:0 8px 20px rgba(0,0,0,0.12)}
+#resultImageWrap{width:120px;height:120px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#fff,#f3f3f3)}
+#resultImage{width:100%;height:100%;object-fit:cover;display:block}
+#resultText{font-size:18px;font-weight:800;color:var(--accent);text-align:center}
+#resultCard.loss #resultText{color:#c33}
+#playAgain{background:var(--accent);color:#fff;padding:10px 16px;border-radius:10px;border:0;min-width:120px}
+
+@media(min-width:520px){
+  #board{aspect-ratio:4/3;grid-template-columns:repeat(4,1fr)}
+}
+
+/* Level selector */
+#levelSelect{display:flex;gap:8px;align-items:center}
+.levelBtn{background:var(--card);padding:6px 10px;border-radius:10px;border:0;font-weight:600;min-width:56px;height:36px;box-shadow:0 2px 4px rgba(0,0,0,0.04)}
+.levelBtn.active{background:var(--accent);color:#fff;box-shadow:0 4px 8px rgba(0,0,0,0.06)}

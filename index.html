@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>เกมจับคู่ภาพ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="hud">
+      <div id="moves">ครั้ง: 0</div>
+      <div id="pairs">จับคู่: 0/6</div>
+      <div id="levelSelect" aria-label="เลือกด่าน" role="radiogroup">
+        <button class="levelBtn" data-pairs="3" aria-checked="false" role="radio">ง่าย</button>
+        <button class="levelBtn active" data-pairs="6" aria-checked="true" role="radio">ปกติ</button>
+      </div>
+      <button id="restart" aria-label="เริ่มใหม่">🔄</button>
+    </div>
+    <div id="board" role="grid" aria-label="บอร์ดจับคู่"></div>
+    <div id="overlay" class="hidden" role="dialog" aria-hidden="true">
+      <div id="resultCard">
+        <div id="resultImageWrap">
+          <img id="resultImage" src="" alt="">
+        </div>
+        <div id="resultText">สำเร็จ!</div>
+        <button id="playAgain">เล่นใหม่</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
